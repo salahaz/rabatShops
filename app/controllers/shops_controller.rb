@@ -5,7 +5,10 @@ class ShopsController < ApplicationController
   # GET /shops
   # GET /shops.json
   def index
-    @shops = Shop.all
+    puts(Users::SessionsController.longitude)
+    puts (Users::SessionsController.latitude)
+    #@shops = Shop.all
+   @shops = Shop.nearby(Users::SessionsController.longitude, Users::SessionsController.latitude)
   end
 
   # GET /shops/1
@@ -70,6 +73,6 @@ class ShopsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shop_params
-      params.require(:shop).permit(:picture, :name, :email, :city)
+      params.require(:shop).permit(:picture, :name, :email, :city, :longitude, :latitude)
     end
 end

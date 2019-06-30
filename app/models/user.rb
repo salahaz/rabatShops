@@ -4,7 +4,7 @@ class User
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  
+        
   ## Database authenticatable
   field :email,              type: String, default: ""
   field :encrypted_password, type: String, default: ""
@@ -23,9 +23,14 @@ class User
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip,    type: String
 
+
   def will_save_change_to_email?
     false
   end
+
+  #def user_params
+  #  params.require(:longitude, :latitude).permit(:longitude, :latitude)
+  #end
 
   ## Confirmable
   # field :confirmation_token,   type: String

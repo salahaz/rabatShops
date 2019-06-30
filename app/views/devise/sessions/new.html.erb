@@ -19,6 +19,8 @@
   <% end %>
 
   <div class="actions">
+    <%= hidden_field_tag :longitude, :id => "longitude", :value => params[:longitude]%>
+    <%= hidden_field_tag :latitude, :id => "latitude", :value => params[:latitude]%>
     <%= f.submit "Log in" %>
   </div>
 <% end %>

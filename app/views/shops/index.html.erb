@@ -1,7 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Shops</h1>
-
+<%= hidden_field_tag :longitude, :id => "longitude", :value => params[:longitude]%>
+<%= hidden_field_tag :latitude, :id => "latitude", :value => params[:latitude]%>
 <table>
   <thead>
     <tr>

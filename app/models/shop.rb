@@ -21,7 +21,7 @@ class Shop
     end
   end
 
-  def self.nearby(lng,lat)
+  def self.nearby(lng, lat)
     Shop.near( :"location"=> { :"type"=>"Point", :"coordinates"=> [lng, lat] } )
     .each { |shop| pp "#{shop.picture}, #{shop.name}, #{shop.email}, #{shop.city}, #{shop.location}"}
   end
