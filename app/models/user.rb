@@ -1,5 +1,6 @@
 class User
   include Mongoid::Document
+  include Mongoid::Persistable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -23,6 +24,24 @@ class User
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip,    type: String
 
+  field :favorite_places,    type: Array, default: []
+  
+  def add_to_favorites(id)
+    @user = User.find(self.id)
+    @user.add_to_set(favorite_places: id)  
+  end 
+
+  def remove_from_favorites(id)
+    @user = User.find(self.id)
+    @user.pull(favorite_places: id)
+  end
+
+  def get_favorites
+    @user = User.find(self.id)
+    return  Shop.where(id: 
+              { :$in => @user.favorite_places })
+                .each { |shop| pp "#{shop.picture}, #{shop.name}, #{shop.email}, #{shop.city}, #{shop.location}"}
+  end
 
   def will_save_change_to_email?
     false

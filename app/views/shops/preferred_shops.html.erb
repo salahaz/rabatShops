@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Shops</h1>
+<h1>Preferred Shops</h1>
 <table>
   <thead>
     <tr>
@@ -20,12 +20,10 @@
         <td><%= shop.email %></td>
         <td><%= shop.city %></td>
         <td><%= link_to 'Show', shop %></td>
-        <td><%= link_to 'Like', likes_shops_path(:id => shop.id), :method => :post %></td>
+        <td><%= link_to 'Remove', remove_from_preferred_shops_path(:id => shop.id), :method => :post %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Shop', new_shop_path %>

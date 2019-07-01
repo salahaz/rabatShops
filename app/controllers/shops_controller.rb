@@ -5,10 +5,7 @@ class ShopsController < ApplicationController
   # GET /shops
   # GET /shops.json
   def index
-    puts(Users::SessionsController.longitude)
-    puts (Users::SessionsController.latitude)
-    #@shops = Shop.all
-   @shops = Shop.nearby(Users::SessionsController.longitude, Users::SessionsController.latitude)
+   @shops = Shop.nearby(Users::SessionsController.longitude, Users::SessionsController.latitude, current_user.id)
   end
 
   # GET /shops/1
@@ -64,6 +61,35 @@ class ShopsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def find_current_user
+    return User.find(current_user.id)
+  end
+
+  def likes
+    @user = find_current_user()
+    @user.add_to_favorites(params[:id])
+    respond_to do |format|
+      format.html { redirect_to shops_url, notice: 'Shop was successfully liked.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def preferred_shops
+    @user = find_current_user()
+    @shops = @user.get_favorites() 
+  end
+
+  def remove_from_preferred
+    @user = find_current_user()
+    @user.remove_from_favorites(params[:id])
+    respond_to do |format|
+      format.html { redirect_to shops_url, notice: 'Shop was successfully removed from preferences.' }
+      format.json { head :no_content }
+    end
+  end
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
