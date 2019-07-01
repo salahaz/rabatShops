@@ -26,16 +26,19 @@ class User
 
   field :favorite_places,    type: Array, default: []
   
+  # Adds a shop id to the user's favorite places
   def add_to_favorites(id)
     @user = User.find(self.id)
     @user.add_to_set(favorite_places: id)  
   end 
 
+  # Adds a shop id from the user's favorite places
   def remove_from_favorites(id)
     @user = User.find(self.id)
     @user.pull(favorite_places: id)
   end
 
+  # Returns favorite places of the user
   def get_favorites
     @user = User.find(self.id)
     return  Shop.where(id: 

@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
 
     protected
 
+    # Allows for additional custom fields to be passed by the view and the it user coordinates
+    # longitude and latitude
     def configure_permitted_parameters
         devise_parameter_sanitizer.permit(:user, keys: [:longitude, :latitude])
         #devise_parameter_sanitizer.permit(:user, keys: [:longitude, :latitude])

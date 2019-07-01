@@ -1,3 +1,5 @@
+# Determines User's current coordinates and returns the values to hidden fields in the views
+
 $(document).ready =>
     getLocation = ->
         if navigator.geolocation

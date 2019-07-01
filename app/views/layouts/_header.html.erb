@@ -1,16 +1,26 @@
+<%-# Header view  -%>
 <header>
       <div >
         <nav class="flex-column flex-sm-row">
           <% if user_signed_in? %>
             <ul class=" p-4 nav justify-content-end navbar-right">
+            <% if request.original_url == 'http://localhost:3000/' %>
               <li class="nav-item">
-                <%= link_to "Nearby Shops",   root_path, :class => "nav-link active" %>
+                <%= link_to "Nearby Shops", root_path, :class => "nav-link elm-underline" %>
               </li>
               <li class="nav-item">
-                <%= link_to "My Preferred Shops",   preferred_shops_path, :class => "nav-link active" %>
+                <%= link_to "My Preferred Shops", preferred_shops_path, :class => "nav-link" %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to "Nearby Shops", root_path, :class => "nav-link" %>
               </li>
               <li class="nav-item">
-                <%= link_to 'Log out', destroy_user_session_path, method: :delete, :class => "nav-link active" %>
+                <%= link_to "My Preferred Shops", preferred_shops_path, :class => "nav-link elm-underline" %>
+              </li>
+            <% end %>
+              <li class="nav-item">
+                <%= link_to 'Log out', destroy_user_session_path, method: :delete, :class => "nav-link" %>
               </li>
             </ul>
           <% end %>

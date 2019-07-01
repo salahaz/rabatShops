@@ -21,11 +21,10 @@ class Shop
     end
   end
 
+  # Finds shops nearby to the provided longitude, and latitude exclude does already liked by the user
   def self.nearby(lng,lat, id)
     @user = User.find(id)
     Shop.where(id: { :$nin => @user.favorite_places }).near( :"location"=> { :"type"=>"Point", :"coordinates"=> [-6.8526685, 34.0019086] } ).each { |shop| pp "#{shop.picture}, #{shop.name}, #{shop.email}, #{shop.city}, #{shop.location}"}
-   # Shop.near( :"location"=> { :"type"=>"Point", :"coordinates"=> [lng, lat] } )
-   # .each { |shop| pp "#{shop.picture}, #{shop.name}, #{shop.email}, #{shop.city}, #{shop.location}"}
   end
 
 end

@@ -1,9 +1,15 @@
 class ShopsController < ApplicationController
+  # Does not allow access to shops before user authentication
+  # Does not allow access to show, edit and destroy methods
   before_action :set_shop, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user! #, except: [:index, :show ]
-  before_action :user_signed_in? #, except: [:index, :show ]
+  before_action :redirect_user, only: [:edit,:destroy, :show]
+  before_action :authenticate_user! 
+  before_action :user_signed_in?
+
+
   # GET /shops
   # GET /shops.json
+  # Returns an index with nearby shops to the client
   def index
    @shops = Shop.nearby(Users::SessionsController.longitude, Users::SessionsController.latitude, current_user.id)
   end
@@ -62,10 +68,12 @@ class ShopsController < ApplicationController
     end
   end
 
+  # Returns an object of the current user
   def find_current_user
     return User.find(current_user.id)
   end
 
+  # Adds a shop to the current user favorite places 
   def likes
     @user = find_current_user()
     @user.add_to_favorites(params[:id])
@@ -75,21 +83,26 @@ class ShopsController < ApplicationController
     end
   end
 
+  # Returns a list of the current user favorite places 
   def preferred_shops
     @user = find_current_user()
     @shops = @user.get_favorites() 
   end
 
+  # Removes a shop from user's favorite places
   def remove_from_preferred
     @user = find_current_user()
     @user.remove_from_favorites(params[:id])
     respond_to do |format|
-      format.html { redirect_to shops_url, notice: 'Shop was successfully removed from preferences.' }
+      format.html { redirect_to preferred_shops_path, notice: 'Shop was successfully removed from preferences.' }
       format.json { head :no_content }
     end
   end
 
-
+  # Eedirects user to web page index
+  def redirect_user
+    redirect_to root_path
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
