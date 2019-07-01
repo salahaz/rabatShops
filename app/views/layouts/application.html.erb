@@ -10,20 +10,7 @@
   </head>
 
   <body>
-    <header class="navbar navbar-fixed-top navbar-inverse">
-      <div class="container">
-        <nav>
-          <% if user_signed_in? %>
-            <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to "Nearby Shops",   root_path %></li>
-              <li><%= link_to "My Preferred Shops",   preferred_shops_path %></li>
-              <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
-              <li><%= link_to 'Profile', edit_user_registration_path %></li>
-            </ul>
-          <% end %>
-        </nav>
-      </div>
-    </header>
+    <%= render "layouts/header" %>
     <%= yield %>
   </body>
 </html>

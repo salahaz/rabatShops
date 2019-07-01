@@ -1,29 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Preferred Shops</h1>
-<table>
-  <thead>
-    <tr>
-      <th>Picture</th>
-      <th>Name</th>
-      <th>Email</th>
-      <th>City</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @shops.each do |shop| %>
-      <tr>
-        <td><%= shop.picture %></td>
-        <td><%= shop.name %></td>
-        <td><%= shop.email %></td>
-        <td><%= shop.city %></td>
-        <td><%= link_to 'Show', shop %></td>
-        <td><%= link_to 'Remove', remove_from_preferred_shops_path(:id => shop.id), :method => :post %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="row">
+<% @shops.each do |shop| %>
+  <div class="col-sm-3 nopadding mr-auto m-5 card" style="width: 18rem;">
+    <%= link_to image_tag(shop.picture, width: "100%", height: "100%"),  :class => "img-fluid card-img-top"%>
+    <div class="card-body">
+      <h5 class="card-title"><%= shop.name %></h5>
+      <h6 class="card-text"><%= shop.email %></h6>
+      <h6 class="card-text"><%= shop.city %></h6>
+    </div>
+    <div class="card-body">
+      <%= link_to 'Remove', remove_from_preferred_shops_path(:id => shop.id), :method => :post, :class => "card-link" %>
+    </div>
+  </div>
+<% end %>
+</div>
 
 <br>
