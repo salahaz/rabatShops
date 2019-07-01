@@ -99,6 +99,7 @@ class ShopsController < ApplicationController
     end
   end
 
+
   # Eedirects user to web page index
   def redirect_user
     redirect_to root_path

@@ -25,7 +25,8 @@ class User
   field :last_sign_in_ip,    type: String
 
   field :favorite_places,    type: Array, default: []
-  
+  field :disliked_places,    type: Array, default: []
+
   # Adds a shop id to the user's favorite places
   def add_to_favorites(id)
     @user = User.find(self.id)

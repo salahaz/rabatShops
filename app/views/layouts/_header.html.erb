@@ -4,7 +4,7 @@
         <nav class="flex-column flex-sm-row">
           <% if user_signed_in? %>
             <ul class=" p-4 nav justify-content-end navbar-right">
-            <% if request.original_url == 'http://localhost:3000/' %>
+            <% if request.original_url == 'https://rabatshops2l19.herokuapp.com/' %>
               <li class="nav-item">
                 <%= link_to "Nearby Shops", root_path, :class => "nav-link elm-underline" %>
               </li>
